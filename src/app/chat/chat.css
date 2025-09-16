@@ -1,0 +1,106 @@
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 800px;
+  margin: auto;
+  height: 80vh;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+h2 {
+  text-align: center;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  margin: 0;
+  background-color: #f7f7f7;
+}
+
+.messages-area {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 15px;
+  background-color: #e9ebee;
+  display: flex;
+  /* Añadimos flex para poder alinear los mensajes hijos */
+  flex-direction: column;
+  /* Apilamos los mensajes verticalmente */
+}
+
+.message {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  max-width: 70%;
+  align-self: flex-start;
+  /* Por defecto, los mensajes se alinean a la izquierda */
+}
+
+.my-message {
+  align-self: flex-end;
+  /* Nuestros mensajes se alinean a la derecha */
+  background-color: #dcf8c6;
+  /* Un color de fondo diferente para distinguirlos */
+  color: #333;
+}
+
+.message-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.message-header strong {
+  color: #007bff;
+}
+
+.timestamp {
+  font-size: 0.8em;
+  color: #888;
+}
+
+.input-area {
+  display: flex;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+}
+
+.input-area input {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  margin-right: 10px;
+}
+
+.input-area button {
+  padding: 10px 20px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.input-area button:hover {
+  background-color: #0056b3;
+}
+
+.btn-logOut {
+  margin-top: 20px;
+  margin-left: 200px;
+  margin-right: 200px;
+  padding: 10px 20px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.button-.btn-logOut:hover {
+  background-color: #c82333;
+}

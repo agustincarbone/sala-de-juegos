@@ -1,0 +1,27 @@
+<main>
+  <div class="login-container">
+    <h2>Inicio de sesión</h2>
+    <form #loginForm="ngForm" (ngSubmit)="login()">
+      <div class="form-group">
+        <label for="email">correo electrónico</label>
+        <input type="email" id="email" name="email" [(ngModel)]="email" required>
+      </div>
+      <div class="form-group">
+        <label for="password">contraseña</label>
+        <input type="password" id="password" name="password" [(ngModel)]="password" required>
+      </div>
+      <button type="submit">Iniciar sesión</button>
+
+    </form>
+
+    <div class="quick-access">
+      <p>Accesos rápidos de prueba:</p>
+      <button (click)="fastLogin('admin')">Admin</button>
+      <button (click)="fastLogin('tester')">Tester</button>
+      <button (click)="fastLogin('guest')">Invitado</button>
+    </div>
+
+    <p>no tienes una cuenta?<a href="/register">Registrarse</a></p>
+  </div>
+</main>
+

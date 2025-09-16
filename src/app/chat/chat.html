@@ -1,0 +1,24 @@
+<div class="chat-container">
+  <h2>Sala de Chat</h2>
+  <div class="messages-area" #scrollContainer>
+    <!-- 
+      Usamos [ngClass] para añadir la clase 'my-message' condicionalmente.
+      Esto nos permitirá aplicar estilos diferentes a nuestros propios mensajes.
+    -->
+    <div *ngFor="let msg of messages$ | async" class="message"
+      [ngClass]="{'my-message': msg.user === currentUserEmail}">
+      <div class="message-header">
+        <strong>{{ msg.user }}</strong>
+        <!-- Usamos el pipe 'date' para formatear la hora -->
+        <span class="timestamp">{{ msg.timestamp.toDate() | date:'shortTime' }}</span>
+      </div>
+      <p>{{ msg.text }}</p>
+    </div>
+  </div>
+  <div class="input-area">
+    <input type="text" [(ngModel)]="newMessage" (keyup.enter)="sendMessage()" placeholder="Escribe un mensaje..." />
+    <button (click)="sendMessage()">Enviar</button>
+
+  </div>
+  <button class="btn-logOut" (click)="logout()">Cerrar sesión</button>
+</div>
