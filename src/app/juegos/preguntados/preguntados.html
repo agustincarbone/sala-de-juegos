@@ -1,0 +1,51 @@
+<div class="container">
+  <h1>Preguntados</h1>
+
+  @if (cargando) {
+  <p>Cargando preguntas...</p>
+  }
+
+  @if (estadoJuego === 'seleccion' && !cargando) {
+  <div class="seleccion-categoria">
+    <h2>Elige una categoría para empezar</h2>
+    <div class="opciones-categoria">
+      @for (categoria of categorias; track categoria) {
+      <button class="btn-juego" (click)="seleccionarCategoria(categoria)">{{ categoria.nombre | titlecase }}</button>
+      }
+    </div>
+  </div>
+  }
+
+  @if (this.estadoJuego === 'jugando' && preguntaActual && !cargando) {
+  <div class="pregunta-container">
+    <h2>{{ preguntaActual.pregunta }}</h2>
+    <div class="opciones">
+      @for (opcion of preguntaActual.opciones; track $index) {
+      <button class="btn-opcion" (click)="seleccionarRespuesta(opcion)" [disabled]="!!respuestaSeleccionada" [ngClass]="{
+          'correcta': respuestaSeleccionada && opcion === preguntaActual.respuestaCorrecta,
+          'incorrecta': respuestaSeleccionada === opcion && opcion !== preguntaActual.respuestaCorrecta,
+          'no-seleccionada': respuestaSeleccionada && respuestaSeleccionada !== opcion && opcion !== preguntaActual.respuestaCorrecta
+        }">
+
+        {{ opcion }}
+      </button>
+      }
+
+    </div>
+    <button class="btn-juego" (click)="cambiarIdioma()">Cambiar idioma</button>
+    <button class="btn-juego" (click)="volverASeleccion()">Elegir otra categoria</button>
+  </div>
+  }
+
+  @if (estadoJuego === 'terminado') {
+  <div class="resultado-final">
+    <h2>¡Juego Terminado!</h2>
+    <p class="puntuacion-final">Tu puntuación final es: {{ puntuacion }} de {{ preguntas.length }}</p>
+    <button class="btn-juego" (click)="volverASeleccion()">Elegir otra categoria</button>
+    <button class="btn-juego" (click)="volverASeleccion()">Jugar de nuevo</button>
+  </div>
+  }
+
+  <p class="puntuacion">Puntuación: {{ puntuacion }}</p>
+
+</div>

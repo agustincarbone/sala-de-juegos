@@ -1,0 +1,93 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: sans-serif;
+    padding: 20px;
+    background-color: #0000003d;
+    border-radius: 10px;
+    max-width: 500px;
+    margin: 20px auto;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+h1 {
+    color: #333;
+}
+
+.carta-container {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.carta {
+    width: 120px;
+    height: 180px;
+    border: 2px solid #333;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px auto;
+    color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.valor {
+    font-size: 48px;
+    font-weight: bold;
+}
+
+.palo-oros {
+    background-color: rgb(206, 172, 23);
+    border-color: rgb(116, 85, 9);
+}
+
+.palo-copas {
+    background-color: rgb(184, 37, 37);
+    border-color: rgb(99, 14, 14);
+}
+
+.palo-espadas {
+    background-color: rgb(51, 72, 177);
+    border-color:  rgb(24, 34, 82);
+}
+
+.palo-bastos {
+    background-color: rgb(39, 161, 39);
+    border-color: rgb(27, 82, 27);
+}
+
+.controles, .resultado-final {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.btn-juego {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 0 10px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    background-color: #6748a1;
+    color: white;
+    font-weight: bold;
+}
+
+.btn-mayor { background-color: #44a347; } /* Verde */
+.btn-menor { background-color: #d32727; } /* Rojo */
+.btn-juego:hover {
+    opacity: 0.8;
+}
+
+.resultado-ronda p {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #0051a8;
+}
+
+.puntuacion {
+    font-size: 1.5em;
+    font-weight: bold;
+}

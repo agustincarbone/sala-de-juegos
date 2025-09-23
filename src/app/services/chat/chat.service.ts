@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
-import {Firestore, collection, addDoc, collectionData, query, orderBy, limit, Timestamp} from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { Firestore, collection, addDoc, collectionData, query, orderBy, limit, Timestamp, CollectionReference, DocumentData, collectionGroup } from '@angular/fire/firestore';
 
 export interface Message {
     user: string;
@@ -13,12 +13,13 @@ export interface Message {
 })
 export class ChatService {
     private firestore: Firestore = inject(Firestore);
-    private messagesCollection = collection(this.firestore, 'chatMessages');
+    private messagesCollection: CollectionReference<Message, DocumentData>;
+    public messages$: Observable<Message[]>;
 
-    // Obtiene los últimos 25 mensajes ordenados por fecha
-    getMessages(): Observable<Message[]> {
-        const q = query(this.messagesCollection, orderBy('timestamp', 'asc'), limit(25));
-        return collectionData(q) as Observable<Message[]>;
+    constructor() {
+        // Explicitly cast the collection to CollectionReference<Message>
+        this.messagesCollection = collection(this.firestore, 'chatMessages') as CollectionReference<Message>;
+        this.messages$ = collectionData(query(this.messagesCollection, orderBy('timestamp', 'asc'), limit(25))) as Observable<Message[]>;
     }
 
     // Añade un nuevo mensaje a la colección

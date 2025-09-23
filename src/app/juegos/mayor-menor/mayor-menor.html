@@ -1,0 +1,33 @@
+<div class="container">
+  <h1>Juego de Mayor o Menor</h1>
+
+  @if (cartaActual) {  
+    <div class="carta-container">
+      <h2>Carta Actual</h2>
+      <div class="carta" [class]="'palo-' + cartaActual.palo">
+        <span class="valor">{{ cartaActual.valor }}</span>
+      </div>
+    </div>
+  }
+
+  @if (juegoTerminado) {
+  <div class="resultado-final">
+    <h2>{{ resultado }}</h2>
+    <button class="btn-juego" (click)="iniciarJuego()">Jugar de Nuevo</button>
+  </div>
+  } @else {
+    <div class="controles">
+      <h3>¿La próxima carta será...?</h3>
+      <button class="btn-juego btn-mayor" (click)="predecir('mayor')">Mayor</button>
+      <button class="btn-juego btn-menor" (click)="predecir('menor')">Menor</button>
+    </div>
+
+    @if (resultado && !juegoTerminado) {
+      <div class="resultado-ronda">
+        <p>{{ resultado }}</p>
+      </div>
+    }
+  }
+
+  <p class="puntuacion">Puntuación: {{ puntuacion }}</p>
+</div>

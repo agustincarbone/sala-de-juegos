@@ -9,7 +9,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 })
 export class QuienSoy {
 
-  nombre = 'Carbone Agustin';
+  nombre = 'Carbone Agustín';
   edad = 25;
   carrera = 'Tecnicatura Universitaria en Programacion';
   universidad = 'Universidad Tecnologica Nacional';

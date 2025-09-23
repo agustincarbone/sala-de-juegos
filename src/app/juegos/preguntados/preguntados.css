@@ -1,0 +1,91 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: sans-serif;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.342);
+    border-radius: 10px;
+    max-width: 600px;
+    margin: 20px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+h1 {
+    color: #333;
+}
+
+.pregunta-container {
+    margin-bottom: 20px;
+}
+
+.opciones {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin: 20px;
+}
+
+.btn-opcion {
+    padding: 15px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 2px solid #6748a1;
+    cursor: pointer;
+    background-color: rgb(125, 91, 204);
+    color: #2c253a;
+    font-weight: bold;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-opcion:not([disabled]):hover {
+    background-color: rgb(75, 33, 153);
+    color: rgb(197, 197, 197);
+}
+
+.btn-opcion.correcta {
+    background-color: #28a745;
+    color: white;
+    border-color: #28a745;
+}
+
+.btn-opcion.incorrecta {
+    background-color: #dc3545;
+    color: white;
+    border-color: #dc3545;
+}
+
+.btn-opcion.no-seleccionada {
+    opacity: 0.6;
+}
+
+.opciones-categoria {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn-juego {
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 2px solid;
+    margin: 2px;
+    border-color: rgb(126, 52, 9);
+    background-color: rgb(179, 100, 55);
+}
+
+.btn-juego:hover {
+    background-color: rgb(126, 52, 9);
+    border-color:  rgb(179, 100, 55);
+    color: rgb(182, 182, 182);
+
+}
+
+.puntuacion,
+.puntuacion-final {
+    font-size: 1.5em;
+    font-weight: bold;
+}

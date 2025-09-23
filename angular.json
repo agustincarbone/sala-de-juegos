@@ -73,7 +73,8 @@
               "buildTarget": "sala-de-juegos:build:production"
             },
             "development": {
-              "buildTarget": "sala-de-juegos:build:development"
+              "buildTarget": "sala-de-juegos:build:development",
+              "proxyConfig": "proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"

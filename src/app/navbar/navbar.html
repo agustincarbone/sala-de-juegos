@@ -1,0 +1,26 @@
+<nav class="navbar">
+  <div class="navbar-brand">
+    <a routerLink="/home">Sala de Juegos</a>
+  </div>
+  <div class="navbar-links">
+    @if (user()) {  
+      <a routerLink="/chat" routerLinkActive="active-link">Chat</a>
+      <div class="games-dropdown">
+        <button (click)="cambiarVisibilidadJuegos()">Juegos</button>
+        @if (mostrarJuegos) {
+          <div class="dropdown-content">
+            <a routerLink="/ahorcado" routerLinkActive="active-link" (click)="cambiarVisibilidadJuegos()">Ahorcado</a>
+            <a routerLink="/mayor-menor" routerLinkActive="active-link" (click)="cambiarVisibilidadJuegos()">Mayor o Menor</a>
+            <a routerLink="/preguntados" routerLinkActive="active-link" (click)="cambiarVisibilidadJuegos()">Preguntados</a>
+          </div>
+        }
+      </div>
+      <div class="user-info">
+        <button (click)="logout()" class="logout-button">Cerrar Sesión</button>
+      </div>
+    } @else {
+      <a routerLink="/login" routerLinkActive="active-link">Iniciar Sesión</a>
+      <a routerLink="/register" routerLinkActive="active-link">Registro</a>
+    }
+  </div>
+</nav>

@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { AuthService } from '../../services/auth/auth.service';
-import { Cargando } from "../../cargando/cargando";
 
 @Component({
   selector: 'app-login',

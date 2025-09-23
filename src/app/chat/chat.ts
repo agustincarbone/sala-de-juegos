@@ -25,7 +25,7 @@ export class Chat implements OnInit, AfterViewChecked {
   currentUserEmail: string = '';
 
   ngOnInit(): void {
-    this.messages$ = this.chatService.getMessages();
+    this.messages$ = this.chatService.messages$;
     this.currentUserEmail = this.authService.currentUser()?.email || 'Anónimo';
     this.scrollToBottom();
   }
@@ -45,14 +45,5 @@ export class Chat implements OnInit, AfterViewChecked {
     try {
       this.scrollContainer.nativeElement.scrollTop = this.scrollContainer.nativeElement.scrollHeight;
     } catch (err) { }
-  }
-  
-  async logout() {
-    try {
-      await this.authService.logout();
-      this.router.navigate(['/login']);
-    } catch (error) {
-      console.error('Error logging out:', error);
-    }
   }
 }

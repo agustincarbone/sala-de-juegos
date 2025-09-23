@@ -1,9 +1,6 @@
 <div class="home-container">
-  <h1>Bienvenido, {{ user()?.email }}</h1>
+  <h1>Bienvenido, {{ user()?.email?.split('@')?.at(0) }}</h1>
 
-  <img src="assets/images/noJuegos.png" alt="no hay juegos" width="75%">
+  <!-- <img src="assets/images/noJuegos.png" alt="no hay juegos" width="75%"> -->
 
-  <button routerLink="/chat">Ir al Chat</button>
-
-  <button class="btn-logOut" (click)="logout()">Cerrar sesión</button>
 </div>
