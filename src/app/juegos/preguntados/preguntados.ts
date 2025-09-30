@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TriviaService, ApiQuestion, Categoria } from '../../services/trivia.service';
+import { TriviaService, ApiQuestion, Categoria, PokemonDetails } from '../../services/trivia.service';
 import { FormsModule } from '@angular/forms';
 export interface Pregunta {
 
@@ -53,6 +53,9 @@ export class Preguntados implements OnInit {
     this.triviaService.getCategories().subscribe({
       next: (categorias) => {
         this.categorias = categorias;
+        // Agregamos la categoría Pokémon manualmente
+        this.categorias.push({ id: 'pokemon-inverso', nombre: 'Pokemon Sprites' });
+        this.categorias.push({ id: 'pokemon', nombre: 'Pokemon' });
         this.cargando = false;
       },
       error: (err) => {
@@ -84,6 +87,17 @@ export class Preguntados implements OnInit {
 
   cargarPreguntas(categoria: string) {
     this.cargando = true;
+
+    if (categoria === 'pokemon') {
+      this.cargarPreguntasPokemon();
+      return;
+    }
+
+    if (categoria === 'pokemon-inverso') {
+      this.cargarPreguntasPokemonInverso();
+      return;
+    }
+
     this.triviaService.getQuestions(categoria).subscribe({
       next: (apiQuestions: ApiQuestion[]) => {
         this.preguntas = apiQuestions.map(q => {
@@ -118,6 +132,58 @@ export class Preguntados implements OnInit {
     });
   }
 
+  cargarPreguntasPokemon() {
+    this.cargando = true;
+    this.triviaService.getPokemonQuestions().subscribe({
+      next: (apiQuestions: ApiQuestion[]) => {
+        this.preguntas = apiQuestions.map(q => {
+          const opciones = [...q.incorrectAnswers, q.correctAnswer];
+          opciones.sort(() => Math.random() - 0.5);
+
+          return {
+            pregunta: q.question.text, // La URL del sprite
+            opciones: opciones.map(name => name.charAt(0).toUpperCase() + name.slice(1)), // Capitalizamos nombres
+            respuestaCorrecta: q.correctAnswer.charAt(0).toUpperCase() + q.correctAnswer.slice(1),
+            espanol: { pregunta: '', opciones: [], respuestaCorrecta: '' }, // No aplica para Pokémon
+            ingles: { pregunta: '', opciones: undefined, respuestaCorrecta: undefined } // No aplica para Pokémon
+          };
+        });
+        this.comenzarRonda();
+      },
+      error: (err) => {
+        console.error('Error al obtener preguntas de Pokémon', err);
+        this.cargando = false;
+      }
+    });
+  }
+
+  cargarPreguntasPokemonInverso() {
+    this.cargando = true;
+    this.triviaService.getPokemonReverseQuestions().subscribe({
+      next: (apiQuestions: ApiQuestion[]) => {
+        this.preguntas = apiQuestions.map(q => {
+          const opciones = [...q.incorrectAnswers, q.correctAnswer];
+          opciones.sort(() => Math.random() - 0.5);
+
+          return {
+            // La pregunta es el nombre del Pokémon
+            pregunta: `¿Cuál de estos es ${q.question.text}?`,
+            // Las opciones son las URLs de los sprites
+            opciones: opciones,
+            respuestaCorrecta: q.correctAnswer,
+            espanol: { pregunta: '', opciones: [], respuestaCorrecta: '' },
+            ingles: { pregunta: '', opciones: undefined, respuestaCorrecta: undefined }
+          };
+        });
+        this.comenzarRonda();
+      },
+      error: (err) => {
+        console.error('Error al obtener preguntas de Pokémon Sprites', err);
+        this.cargando = false;
+      }
+    });
+  }
+
   seleccionarCategoria(categoria: Categoria): void {
     this.categoriaSeleccionada = categoria.id;
     this.estadoJuego = 'jugando';
@@ -133,11 +199,13 @@ export class Preguntados implements OnInit {
     this.respuestaSeleccionada = null;
     this.preguntaActual = this.preguntas[this.indicePreguntaActual];
 
-    // Imprimimos en consola la pregunta y respuestas en inglés para la pregunta actual
-    console.log('--- Pregunta Original (Inglés) ---');
-    console.log('Pregunta:', this.preguntaActual?.ingles.pregunta);
-    console.log('Respuesta Correcta:', this.preguntaActual?.ingles.respuestaCorrecta);
-    console.log('Opciones:', this.preguntaActual?.ingles.opciones);
+    if (this.categoriaSeleccionada !== 'pokemon' && this.categoriaSeleccionada !== 'pokemon-inverso') {
+      // Imprimimos en consola la pregunta y respuestas en inglés para la pregunta actual
+      console.log('--- Pregunta Original (Inglés) ---');
+      console.log('Pregunta:', this.preguntaActual?.ingles.pregunta);
+      console.log('Respuesta Correcta:', this.preguntaActual?.ingles.respuestaCorrecta);
+      console.log('Opciones:', this.preguntaActual?.ingles.opciones);
+    }
 
     this.cargando = false;
 

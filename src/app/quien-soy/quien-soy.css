@@ -1,48 +1,97 @@
+.quien-soy-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  min-height: 80vh;
+}
 
-    .quien-soy-container {
-      display: flex;
-      align-items: center;
-      font-family: sans-serif;
-      max-width: 500px;
-      margin: 50px auto;
-      padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-      background: #fff;
-      transition: transform 0.3s;
-    }
-    .quien-soy-container:hover {
-      transform: translateY(-5px);
-    }
-    .image-container {
-      flex-shrink: 0;
-      margin-right: 25px;
-    }
-    .image-container img {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      border: 4px solid #4CAF50;
-    }
-    .data-container {
-      flex-grow: 1;
-    }
-    h2 {
-      color: #333;
-      margin: 0 0 15px 0;
-      border-bottom: 2px solid #4CAF50;
-      padding-bottom: 10px;
-    }
-    ul {
-      list-style-type: none;
-      padding: 0;
-      margin: 0;
-    }
-    li {
-      margin-bottom: 10px;
-      color: #555;
-      font-size: 16px;
-    }
-    strong {
-      color: #4CAF50;
-    }
+.profile-card {
+  background-color: #cccccc;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  width: 100%;
+  overflow: hidden;
+  text-align: center;
+}
+
+.profile-header {
+  background: linear-gradient(135deg, #6efbf4, #7be377);
+  color: rgb(0, 0, 0);
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 4px solid white;
+  margin-bottom: 15px;
+}
+
+.profile-info h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.profile-info h2 {
+  margin: 5px 0 10px;
+  font-weight: 400;
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+.profile-info p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.profile-body {
+  padding: 30px;
+}
+
+.bio {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 25px;
+  /* Esta propiedad hace que se respeten los saltos de línea del texto */
+  white-space: pre-line;
+}
+
+.profile-stats {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 25px;
+}
+
+.profile-stats span {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+  color: #777;
+}
+
+.profile-stats strong {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #333;
+}
+
+.btn-github {
+  display: inline-block;
+  padding: 12px 25px;
+  background-color: #333;
+  color: white;
+  text-decoration: none;
+  border-radius: 25px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.btn-github:hover {
+  background-color: #555;
+}

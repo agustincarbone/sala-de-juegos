@@ -15,6 +15,12 @@ h1 {
     color: #333;
 }
 
+.cartas-display {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
 .carta-container {
     margin-bottom: 20px;
     text-align: center;

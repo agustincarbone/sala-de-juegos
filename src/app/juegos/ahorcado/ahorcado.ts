@@ -23,6 +23,10 @@ export class Ahorcado implements OnInit {
     this.startGame();
   }
 
+  private quitarAcentos(texto: string): string {
+    return texto.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  }
+
   public async startGame(): Promise<void> {
     this.definicion = '';
 
@@ -37,10 +41,11 @@ export class Ahorcado implements OnInit {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       else {
-        this.palabra = infoPalabra.word;
+        const palabraOriginal = infoPalabra.word;
+        this.palabra = this.quitarAcentos(palabraOriginal);
 
         try {
-          const responseDef = await fetch(`https://rae-api.com/api/words/${this.palabra}`);
+          const responseDef = await fetch(`https://rae-api.com/api/words/${palabraOriginal}`);
           const dataDef = await responseDef.json();
           this.definicion = dataDef.data.meanings[0].senses[0].description;
 
@@ -52,7 +57,8 @@ export class Ahorcado implements OnInit {
     } catch (error) {
       console.error("Error al obtener palabra de la API, usando lista local.", error);
 
-      this.palabra = this.words[Math.floor(Math.random() * this.words.length)];
+      const palabraOriginal = this.words[Math.floor(Math.random() * this.words.length)];
+      this.palabra = this.quitarAcentos(palabraOriginal);
     }
 
     this.mostrarPalabra = Array(this.palabra.length).fill('');

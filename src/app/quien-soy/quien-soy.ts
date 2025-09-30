@@ -1,17 +1,22 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { GithubService, GithubProfile } from '../services/github.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-quien-soy',
-  imports: [],
-  templateUrl:'./quien-soy.html',
-  styleUrl: './quien-soy.css',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './quien-soy.html',
+  styleUrl: './quien-soy.css'
 })
-export class QuienSoy {
+export class QuienSoy implements OnInit {
+  private githubService = inject(GithubService);
 
-  nombre = 'Carbone Agustín';
-  edad = 25;
-  carrera = 'Tecnicatura Universitaria en Programacion';
-  universidad = 'Universidad Tecnologica Nacional';
-  imageUrl = '';
+  profile$: Observable<GithubProfile> | undefined;
+  private username = 'agustincarbone';
+
+  ngOnInit(): void {
+    this.profile$ = this.githubService.getProfile(this.username);
+  }
 }

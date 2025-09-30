@@ -39,9 +39,16 @@ h1 {
     transition: background-color 0.3s, color 0.3s;
 }
 
-.btn-opcion:not([disabled]):hover {
+.btn-opcion:not([disabled]):active {
     background-color: rgb(75, 33, 153);
     color: rgb(197, 197, 197);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .btn-opcion:not([disabled]):hover {
+        background-color: rgb(75, 33, 153);
+        color: rgb(197, 197, 197);
+    }
 }
 
 .btn-opcion.correcta {

@@ -13,6 +13,7 @@ interface Carta {
 export class MayorMenor implements OnInit{
   mazo: Carta[] = [];
   cartaActual: Carta | undefined;
+  cartaAnterior: Carta | undefined;
   puntuacion: number = 0;
   resultado: string = '';
   juegoTerminado: boolean = false;
@@ -27,6 +28,7 @@ export class MayorMenor implements OnInit{
     this.mazo = this.crearMazo();
     this.barajarMazo();
     this.cartaActual = this.darCarta();
+    this.cartaAnterior = undefined;
     this.puntuacion = 0;
     this.resultado = '';
     this.juegoTerminado = false;
@@ -54,6 +56,7 @@ export class MayorMenor implements OnInit{
     if (!this.cartaActual || this.juegoTerminado) return;
 
     const nuevaCarta = this.darCarta();
+    this.cartaAnterior = this.cartaActual; // Guardamos la carta actual como la anterior
 
     if (!nuevaCarta) {
       this.resultado = '¡Mazo terminado!';

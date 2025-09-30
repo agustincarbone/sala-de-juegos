@@ -18,21 +18,31 @@
 
   @if (this.estadoJuego === 'jugando' && preguntaActual && !cargando) {
   <div class="pregunta-container">
+    @if(preguntaActual.pregunta.startsWith('http')) {
+      <img [src]="preguntaActual.pregunta" alt="¿Qué Pokémon es?" width="150" height="150">
+      <h2>¿Qué Pokémon es?</h2>
+    } @else {
     <h2>{{ preguntaActual.pregunta }}</h2>
+    }
     <div class="opciones">
       @for (opcion of preguntaActual.opciones; track $index) {
       <button class="btn-opcion" (click)="seleccionarRespuesta(opcion)" [disabled]="!!respuestaSeleccionada" [ngClass]="{
-          'correcta': respuestaSeleccionada && opcion === preguntaActual.respuestaCorrecta,
-          'incorrecta': respuestaSeleccionada === opcion && opcion !== preguntaActual.respuestaCorrecta,
-          'no-seleccionada': respuestaSeleccionada && respuestaSeleccionada !== opcion && opcion !== preguntaActual.respuestaCorrecta
-        }">
-
+        'correcta': respuestaSeleccionada && opcion === preguntaActual.respuestaCorrecta,
+        'incorrecta': respuestaSeleccionada === opcion && opcion !== preguntaActual.respuestaCorrecta,
+        'no-seleccionada': respuestaSeleccionada && respuestaSeleccionada !== opcion && opcion !== preguntaActual.respuestaCorrecta
+      }">
+        @if(opcion.startsWith('http')) {
+        <img [src]="opcion" alt="Opción de Pokémon" width="96" height="96">
+        } @else {
         {{ opcion }}
+        }
       </button>
       }
 
     </div>
+    @if(categoriaSeleccionada !== 'pokemon' && categoriaSeleccionada !== 'pokemon-inverso') {
     <button class="btn-juego" (click)="cambiarIdioma()">Cambiar idioma</button>
+    }
     <button class="btn-juego" (click)="volverASeleccion()">Elegir otra categoria</button>
   </div>
   }

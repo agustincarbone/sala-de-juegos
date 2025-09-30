@@ -1,14 +1,24 @@
 <div class="container">
   <h1>Juego de Mayor o Menor</h1>
 
-  @if (cartaActual) {  
-    <div class="carta-container">
-      <h2>Carta Actual</h2>
-      <div class="carta" [class]="'palo-' + cartaActual.palo">
-        <span class="valor">{{ cartaActual.valor }}</span>
+  <div class="cartas-display">
+    @if (cartaAnterior) {
+      <div class="carta-container">
+        <h2>Carta Anterior</h2>
+        <div class="carta" [class]="'palo-' + cartaAnterior.palo">
+          <span class="valor">{{ cartaAnterior.valor }}</span>
+        </div>
       </div>
-    </div>
-  }
+    }
+    @if (cartaActual) {
+      <div class="carta-container">
+        <h2>Carta Actual</h2>
+        <div class="carta" [class]="'palo-' + cartaActual.palo">
+          <span class="valor">{{ cartaActual.valor }}</span>
+        </div>
+      </div>
+    }
+  </div>
 
   @if (juegoTerminado) {
   <div class="resultado-final">
